@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Fit Client Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: transparent;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        #quiz-container {
+            max-width: 600px;
+            width: 100%;
+        }
+        .question { 
+            margin-top: 20px; 
+            font-size: 16px; 
+        }
+        .response { 
+            color: red; 
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .button { 
+            margin-top: 10px; 
+        }
+        .answer-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: black;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .answer-button:hover {
+            background-color: #f0f0f0;
+        }
+        .start-again-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .start-again-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="quiz-container">
+        <h1>Perfect Fit Client Quiz</h1>
+        <div id="quiz">
+            <div class="question" id="question1">
+                <p>1. Is this a current client?</p>
+                <div class="answer-button" onclick="answerQuestion(1, 'yes')">Yes</div>
+                <div class="answer-button" onclick="answerQuestion(1, 'no')">No</div>
+            </div>
+        </div>
+        <div id="response" class="response"></div>
+        <button id="start-again" class="start-again-button" onclick="startAgain()" style="display:none;">Start Again</button>
+    </div>
+
+
+    <script>
+        let currentClient = false;
+        let fourFigureBudget = false;
+
+
+        function answerQuestion(question, answer) {
+            const quizDiv = document.getElementById("quiz");
+            const responseDiv = document.getElementById("response");
+            const startAgainButton = document.getElementById("start-again");
+
+
+            if (question === 1) {
+                currentClient = (answer === 'yes');
+                quizDiv.innerHTML = `
+                    <div class="question" id="question2">
+                        <p>2. ${currentClient ? "Are they paying you 4-figures?" : "Do they have a minimum 4-figure budget to cover the cost of content, campaigns, and your services?"}</p>
+                        <div class="answer-button" onclick="answerQuestion(2, 'yes')">Yes</div>
+                        <div class="answer-button" onclick="answerQuestion(2, 'no')">No</div>
+                    </div>
+                `;
+            } else if (question === 2) {
+                fourFigureBudget = (answer === 'yes');
+                if (!fourFigureBudget) {
+                    responseDiv.textContent = currentClient ?
+                        "If income is a priority, our advice would be to either increase your fees with this client or prioritize marketing your business to bring in new 4-figure leads so you can make a plan to replace them" :
+                        "This client is probably not a perfect fit for your management services. We would recommend offering them an alternative service and prioritize marketing your business to bring in more 4-figure leads.";
+                    startAgainButton.style.display = "inline-block";
+                } else {
+                    quizDiv.innerHTML = `
+                        <div class="question" id="question3">
+                            <p>3. Are they on a platform you want to work on?</p>
+                            <div class="answer-button" onclick="answerQuestion(3, 'yes')">Yes</div>
+                            <div class="answer-button" onclick="answerQuestion(3, 'no')">No</div>
+                        </div>
+                    `;
+                }
+            } else if (question === 3) {
+                if (answer === 'no') {
+                    responseDiv.textContent = "This client is probably not a perfect fit for your management services. We would recommend offering them an alternative service and prioritize marketing your business to bring in more 4-figure leads who need help with the platform(s) you do wish to work on long-term.";
+                    startAgainButton.style.display = "inline-block";
+                } else {
+                    quizDiv.innerHTML = currentClient ? `
+                        <div class="question" id="question4">
+                            <p>4. Do they have access to their accounts?</p>
+                            <div class="answer-button" onclick="answerQuestion(4, 'yes')">Yes</div>
+                            <div class="answer-button" onclick="answerQuestion(4, 'no')">No</div>
+                            <div class="answer-button" onclick="answerQuestion(4, 'not sure')">Not Sure</div>
+                        </div>
+                    ` : `
+                        <div class="question" id="question5">
+                            <p>5. Is this client in a niche, sector, or industry you know well and/or want to work in?</p>
+                            <div class="answer-button" onclick="answerQuestion(5, 'yes')">Yes</div>
+                            <div class="answer-button" onclick="answerQuestion(5, 'no')">No</div>
+                        </div>
+                    `;
+                }
+            } else if (question === 4) {
+                if (answer === 'no' || answer === 'not sure') {
+                    responseDiv.textContent = "This is a red flag for us! Unless the client has access to their accounts, it is pretty impossible to start the working relationship well. We'd recommend you push back on them to get access before taking this to the next stage.";
+                    startAgainButton.style.display = "inline-block";
+                } else {
+                    quizDiv.innerHTML = `
+                        <div class="question" id="question5">
+                            <p>5. Is this client in a niche, sector, or industry you know well and/or want to work in?</p>
+                            <div class="answer-button" onclick="answerQuestion(5, 'yes')">Yes</div>
+                            <div class="answer-button" onclick="answerQuestion(5, 'no')">No</div>
+                        </div>
+                    `;
+                }
+            } else if (question === 5) {
+                if (answer === 'no') {
+                    responseDiv.textContent = "You don’t have to only take on clients in your specific niche, but you can turn away clients in sectors you don’t want to work in if they are not a perfect fit client. We'd recommend thinking about this further.";
+                    startAgainButton.style.display = "inline-block";
+                } else {
+                    quizDiv.innerHTML = `
+                        <div class="question" id="question6">
+                            <p>6. Does the client’s business have a proven concept?</p>
+                            <div class="answer-button" onclick="answerQuestion(6, 'yes')">Yes</div>
+                            <div class="answer-button" onclick="answerQuestion(6, 'no')">No</div>
+                        </div>
+                    `;
+                }
+            } else if (question === 6) {
+                if (answer === 'no') {
+                    responseDiv.textContent = "A client without a proven concept can be really difficult to get results for. In our experience, these are not perfect fit clients and will often result in issues. We would recommend you prioritize marketing your business and adjusting your messaging to speak to 4-figure businesses who already have a proven concept.";
+                    startAgainButton.style.display = "inline-block";
+                } else {
+                    quizDiv.innerHTML = `
+                        <div class="question" id="question7">
+                            <p>7. Is it easy and simple for a potential customer to buy from them or become a lead on their website? If not, does the company have systems in place to handle leads and sales easily?</p>
+                            <div class="answer-button" onclick="answerQuestion(7, 'yes')">Yes</div>
+                            <div class="answer-button" onclick="answerQuestion(7, 'no')">No</div>
+                        </div>
+                    `;
+                }
+            } else if (question === 7) {
+                if (answer === 'no') {
+                    responseDiv.textContent = "You could find it is really difficult to get results for this client, and in our experience, these are not perfect fit clients. We would recommend you prioritize marketing your business and adjusting your messaging to speak to 4-figure businesses who do have better systems to convert potential customers.";
+                    startAgainButton.style.display = "inline-block";
+                } else {
+                    quizDiv.innerHTML = `
+                        <div class="question" id="question8">
+                            <p>8. Do they have existing assets for content or a budget to get it?</p>
+                            <div class="answer-button" onclick="answerQuestion(8, 'yes')">Yes</div>
+                            <div class="answer-button" onclick="answerQuestion(8, 'no')">No</div>
+                        </div>
+                    `;
+                }
+            } else if (question === 8) {
+                if (answer === 'no') {
+                    responseDiv.textContent = "A perfect fit client MUST have one or the other! This could simply be a case of you needing to educate the client on this requirement.";
+                    startAgainButton.style.display = "inline-block";
+                } else {
+                    quizDiv.innerHTML = `
+                        <div class="question" id="question9">
+                            <p>9. Are their goals realistic and achievable based on their budget, content, and overall setup?</p>
+                            <div class="answer-button" onclick="answerQuestion(9, 'yes')">Yes</div>
+                            <div class="answer-button" onclick="answerQuestion(9, 'no')">No</div>
+                        </div>
+                    `;
+                }
+            } else if (question === 9) {
+                responseDiv.textContent = answer === 'no' ?
+                    "This is probably not a good fit client as over time they will become more and more frustrated that they are not getting the results they want, because they are unrealistic. We would recommend you prioritize marketing your business using messaging designed to bring in 4-figure leads who do understand what can realistically be achieved on social media." :
+                    "This sounds like it could be a perfect fit client!";
+                startAgainButton.style.display = "inline-block";
+            }
+        }
+
+
+        function startAgain() {
+            document.getElementById("quiz").innerHTML = `
+                <div class="question" id="question1">
+                    <p>1. Is this a current client?</p>
+                    <div class="answer-button" onclick="answerQuestion(1, 'yes')">Yes</div>
+                    <div class="answer-button" onclick="answerQuestion(1, 'no')">No</div>
+                </div>
+            `;
+            document.getElementById("response").textContent = "";
+            document.getElementById("start-again").style.display = "none";
+        }
+    </script>
+</body>
+</html>
