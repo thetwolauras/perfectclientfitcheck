@@ -7,9 +7,8 @@
     <!-- Link to Poppins Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* General styles */
-        body { 
-            font-family: 'Poppins', sans-serif; 
+        body {
+            font-family: 'Poppins', sans-serif;
             background-color: transparent;
             margin: 0;
             padding: 20px;
@@ -25,17 +24,16 @@
         }
         h1 {
             font-family: 'Poppins', sans-serif;
-            font-weight: 700; /* Bold */
-            margin-top: 20px; /* 20px spacing above the header */
+            font-weight: 700;
+            margin-top: 20px;
             margin-bottom: 0;
         }
-        .question { 
-            margin-top: 20px; 
-            font-size: 16px; 
-            font-weight: 400; /* Normal weight */
+        .question {
+            margin-top: 20px;
+            font-size: 16px;
         }
-        .response { 
-            color: red; 
+        .response {
+            color: red;
             font-size: 16px;
             margin-top: 10px;
         }
@@ -50,8 +48,6 @@
             margin: 10px;
             cursor: pointer;
             text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 400; /* Normal weight */
         }
         .answer-button:hover {
             background-color: #f0f0f0;
@@ -67,8 +63,6 @@
             margin-top: 20px;
             cursor: pointer;
             text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 400; /* Normal weight */
         }
         .start-again-button:hover {
             background-color: #0056b3;
@@ -129,18 +123,12 @@
                     responseDiv.textContent = "This client is probably not a perfect fit for your management services. We would recommend offering them an alternative service and prioritize marketing your business to bring in more 4-figure leads who need help with the platform(s) you do wish to work on long-term.";
                     startAgainButton.style.display = "inline-block";
                 } else {
-                    quizDiv.innerHTML = currentClient ? `
+                    quizDiv.innerHTML = `
                         <div class="question" id="question4">
                             <p>4. Do they have access to their accounts?</p>
                             <div class="answer-button" onclick="answerQuestion(4, 'yes')">Yes</div>
                             <div class="answer-button" onclick="answerQuestion(4, 'no')">No</div>
                             <div class="answer-button" onclick="answerQuestion(4, 'not sure')">Not Sure</div>
-                        </div>
-                    ` : `
-                        <div class="question" id="question5">
-                            <p>5. Is this client in a niche, sector, or industry you know well and/or want to work in?</p>
-                            <div class="answer-button" onclick="answerQuestion(5, 'yes')">Yes</div>
-                            <div class="answer-button" onclick="answerQuestion(5, 'no')">No</div>
                         </div>
                     `;
                 }
@@ -170,6 +158,19 @@
                         </div>
                     `;
                 }
+            } else if (question === 6) {
+                if (answer === 'no') {
+                    responseDiv.textContent = "A client without a proven concept can be really difficult to get results for. In our experience, these are not perfect fit clients and will often result in issues. We would recommend you prioritize marketing your business and adjusting your messaging to speak to 4-figure businesses who already have a proven concept.";
+                    startAgainButton.style.display = "inline-block";
+                } else {
+                    quizDiv.innerHTML = `
+                        <div class="question" id="question7">
+                            <p>7. Is it easy and simple for a potential customer to buy from them or become a lead on their website?</p>
+                            <div class="answer-button" onclick="answerQuestion(7, 'yes')">Yes</div>
+                            <div class="answer-button" onclick="answerQuestion(7, 'no')">No</div>
+                        </div>
+                    `;
+                }
             }
         }
 
@@ -187,4 +188,3 @@
     </script>
 </body>
 </html>
-
