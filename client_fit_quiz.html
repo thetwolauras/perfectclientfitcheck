@@ -105,9 +105,9 @@
             } else if (question === 2) {
                 fourFigureBudget = (answer === 'yes');
                 if (!fourFigureBudget) {
-                    responseDiv.textContent = currentClient ?
-                        "If income is a priority, our advice would be to either increase your fees with this client or prioritize marketing your business to bring in new 4-figure leads so you can make a plan to replace them" :
-                        "This client is probably not a perfect fit for your management services. We would recommend offering them an alternative service and prioritize marketing your business to bring in more 4-figure leads.";
+                    responseDiv.textContent = currentClient
+                        ? "If income is a priority, our advice would be to either increase your fees with this client or prioritize marketing your business to bring in new 4-figure leads so you can make a plan to replace them."
+                        : "This client is probably not a perfect fit for your management services. We would recommend offering them an alternative service and prioritizing marketing your business to bring in more 4-figure leads.";
                     startAgainButton.style.display = "inline-block";
                 } else {
                     quizDiv.innerHTML = `
@@ -120,7 +120,7 @@
                 }
             } else if (question === 3) {
                 if (answer === 'no') {
-                    responseDiv.textContent = "This client is probably not a perfect fit for your management services. We would recommend offering them an alternative service and prioritize marketing your business to bring in more 4-figure leads who need help with the platform(s) you do wish to work on long-term.";
+                    responseDiv.textContent = "This client is probably not a perfect fit for your management services. We would recommend offering them an alternative service and prioritizing marketing your business to bring in more 4-figure leads who need help with the platform(s) you do wish to work on long-term.";
                     startAgainButton.style.display = "inline-block";
                 } else {
                     quizDiv.innerHTML = `
@@ -160,17 +160,24 @@
                 }
             } else if (question === 6) {
                 if (answer === 'no') {
-                    responseDiv.textContent = "A client without a proven concept can be really difficult to get results for. In our experience, these are not perfect fit clients and will often result in issues. We would recommend you prioritize marketing your business and adjusting your messaging to speak to 4-figure businesses who already have a proven concept.";
+                    responseDiv.textContent = "A client without a proven concept can be really difficult to get results for. In our experience, these are not perfect fit clients and will often result in issues. We would recommend prioritizing marketing your business and adjusting your messaging to speak to 4-figure businesses who already have a proven concept.";
                     startAgainButton.style.display = "inline-block";
                 } else {
                     quizDiv.innerHTML = `
                         <div class="question" id="question7">
-                            <p>7. Is it easy and simple for a potential customer to buy from them or become a lead on their website?</p>
+                            <p>7. Is it easy and simple for a potential customer to buy from them or become a lead?</p>
                             <div class="answer-button" onclick="answerQuestion(7, 'yes')">Yes</div>
                             <div class="answer-button" onclick="answerQuestion(7, 'no')">No</div>
                         </div>
                     `;
                 }
+            } else if (question === 7) {
+                if (answer === 'no') {
+                    responseDiv.textContent = "You could find it is really difficult to get results for this client, and in our experience, these are not perfect fit clients. We recommend focusing on businesses with better systems to convert potential customers.";
+                } else {
+                    responseDiv.textContent = "This sounds like it could be a perfect fit client! Well done on identifying an excellent opportunity.";
+                }
+                startAgainButton.style.display = "inline-block";
             }
         }
 
@@ -188,3 +195,4 @@
     </script>
 </body>
 </html>
+
